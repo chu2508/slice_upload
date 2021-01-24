@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./js/md5.js" ></script>
+  </head>
+  <body>
+    <!-- 上传文件列表中每个文件的信息模版 -->
+    <script type="text/template" id="file-upload-tpl">
+      <tr id="{{hash}}">
+        <td>{{fileName}}</td>
+          <td>{{fileType}}</td>
+          <td>{{fileSize}}</td>
+          <th>{{hash}}</th>
+          <td class="upload-progress">{{progress}}</td>
+          <td>
+              <input type="button" class="upload-item-btn" data-hash="{{hash}}" data-state="default" value="开始上传">
+          </td>
+      </tr>
+    </script>
+    <input id="file_btn" type="file" />
+    <table id="upload-list">
+      <thead>
+        <tr>
+          <th width="15%">文件名</th>
+          <th width="15%">文件类型</th>
+          <th width="15%">文件大小</th>
+          <th width="20%">md5</th>
+          <th width="20%">上传进度</th>
+          <th width="15%">
+            <input type="button" id="upload-all-btn" value="全部上传" />
+          </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script src="./index.js"></script>
+  </body>
+</html>
