@@ -91,11 +91,11 @@ app.use(router.routes());
 
 ### 文件切片上传
 
-获取到上传任务之后，就可以根据任务里的 chunkSize 将文件切片,让后上传了。
+获取到上传任务之后，就可以根据任务里的 chunkSize 将文件切片,然后上传了。
 
 #### 前端代码
 
-通过递归调用函数，将chunk依次上传。
+通过递归调用函数，将 chunk 依次上传。
 
 ```js
 /**
@@ -225,13 +225,13 @@ router.post("/upload_chunk", async (ctx) => {
 #### 前端代码
 
 ```js
-  async function concatChunks(hash) {
-    return fetch("http://127.0.0.1:38080/api/concat_chunk", {
-      method: "POST",
-      body: JSON.stringify({ hash }),
-      headers: { "Content-Type": "application/json" },
-    }).then((res) => res.json());
-  }
+async function concatChunks(hash) {
+  return fetch("http://127.0.0.1:38080/api/concat_chunk", {
+    method: "POST",
+    body: JSON.stringify({ hash }),
+    headers: { "Content-Type": "application/json" },
+  }).then((res) => res.json());
+}
 ```
 
 #### 后端代码
@@ -254,14 +254,13 @@ router.post("/concat_chunk", async (ctx) => {
     return;
   }
 
-
   // 先校验 chunk数量是否一致
   const chunkDir = getTempDirByHash(hash);
   const chunkCount = Math.ceil(task.fileSize / task.chunkSize);
   const chunkPaths = await fs.promises.readdir(chunkDir);
   if (chunkCount !== chunkPaths.length) {
     ctx.body = { error: "文件切片校验不一致" };
-    ctx.status = 500;
+    ctx.status = 400;
     return;
   }
   const chunkFullPaths = chunkPaths
@@ -280,15 +279,15 @@ router.post("/concat_chunk", async (ctx) => {
   // 校验文件的大小
   if (stat.size !== task.fileSize) {
     ctx.body = { error: "文件大小校验不一致" };
-    ctx.status = 500;
+    ctx.status = 400;
     return;
   }
 
-  // hash最后校验hash
+  // 最后校验hash
   const fileHash = await getFileMd5(filePath);
   if (fileHash !== task.hash) {
     ctx.body = { error: "文件哈希校验不一致" };
-    ctx.status = 500;
+    ctx.status = 400;
     return;
   }
 
@@ -299,5 +298,6 @@ router.post("/concat_chunk", async (ctx) => {
 });
 ```
 
- ## 总结
+## 总结
 
+首先获取文件的元信息，通过将元信息保存在服务器上，记录下上传任务的状态，我们实现了文件的断点续传功能。
