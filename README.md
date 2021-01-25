@@ -1,9 +1,3 @@
----
-# 主题列表：juejin, github, smartblue, cyanosis, channing-cyan, fancy, hydrogen, condensed-night-purple, greenwillow, v-green, vue-pro, healer-readable, mk-cute, jzman, geek-black, awesome-green, qklhk-chocolate
-# 贡献主题：https://github.com/xitu/juejin-markdown-themes
-theme: juejin
-highlight:
----
 
 # 如何实现一个切片上传服务
 
