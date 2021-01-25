@@ -1,3 +1,10 @@
+---
+# 主题列表：juejin, github, smartblue, cyanosis, channing-cyan, fancy, hydrogen, condensed-night-purple, greenwillow, v-green, vue-pro, healer-readable, mk-cute, jzman, geek-black, awesome-green, qklhk-chocolate
+# 贡献主题：https://github.com/xitu/juejin-markdown-themes
+theme: juejin
+highlight:
+---
+
 # 如何实现一个切片上传服务
 
 最近项目中遇到的一个需求，要求上传文件时如果碰上断网或是其他情况导致上传失败，那么下次开始上传同一份文件，可以从断点开始需传。百度了一下，发现要实现这个功能，需要后端的配合，所以自己就用 koa 实现一个简单的切片上传服务，用来给开发前端时调试用。现在把实现过程记录下来，以作备忘。
@@ -14,7 +21,7 @@
 6. 将切片文件合并
 7. 文件的完整性校验
 
-这些需要服务端与前端共同配合完成。
+这些需要后端与前端共同配合完成。
 
 ## 实现
 
